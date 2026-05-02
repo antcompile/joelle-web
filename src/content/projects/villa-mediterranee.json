@@ -1,0 +1,29 @@
+{
+  "slug": "villa-mediterranee",
+  "title": {
+    "fr": "Villa Mediterranee",
+    "en": "Mediterranean Villa",
+    "ar": "فيلا البحر المتوسط"
+  },
+  "description": {
+    "fr": "Une villa contemporaine ou le minimalisme mediterraneen rencontre le confort absolu. Materiaux naturels, lumieres douces et lignes epurees.",
+    "en": "A contemporary villa where Mediterranean minimalism meets absolute comfort. Natural materials, soft lighting, and clean lines.",
+    "ar": "فيلا معاصرة حيث يلتقي التقشف المتوسطي بالراحة المطلقة. مواد طبيعية وإضاءة ناعمة وخطوط نظيفة."
+  },
+  "location": {
+    "fr": "Beyrouth, Liban",
+    "en": "Beirut, Lebanon",
+    "ar": "بيروت، لبنان"
+  },
+  "category": "residential",
+  "year": 2024,
+  "area_sqm": 350,
+  "scope": {
+    "fr": "Conception complete",
+    "en": "Full design",
+    "ar": "تصميم كامل"
+  },
+  "images": ["hero.jpg", "living-01.jpg", "kitchen-01.jpg", "bedroom-01.jpg", "detail-01.jpg"],
+  "featured": true,
+  "order": 1
+}

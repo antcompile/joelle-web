@@ -1,0 +1,29 @@
+{
+  "slug": "penthouse-renovation",
+  "title": {
+    "fr": "Renovation Penthouse",
+    "en": "Penthouse Renovation",
+    "ar": "تجديد البنتهاوس"
+  },
+  "description": {
+    "fr": "Metamorphose d'un penthouse des annees 80 en espace contemporain baigne de lumiere. Ouvertures maximisees, materiaux chaleureux et vue panoramique sublimee.",
+    "en": "Metamorphosis of an 80s penthouse into a light-filled contemporary space. Maximized openings, warm materials, and enhanced panoramic views.",
+    "ar": "تحول بنتهاوس من الثمانينات إلى مساحة معاصرة مغمورة بالضوء. فتحات مكبرة ومواد دافئة وإطلالة بانورامية مبهرة."
+  },
+  "location": {
+    "fr": "Beyrouth, Liban",
+    "en": "Beirut, Lebanon",
+    "ar": "بيروت، لبنان"
+  },
+  "category": "residential",
+  "year": 2022,
+  "area_sqm": 250,
+  "scope": {
+    "fr": "Renovation et ameublement",
+    "en": "Renovation and furnishing",
+    "ar": "تجديد وتأثيث"
+  },
+  "images": ["hero.jpg", "salon-01.jpg", "terrace-01.jpg", "detail-01.jpg"],
+  "featured": false,
+  "order": 5
+}

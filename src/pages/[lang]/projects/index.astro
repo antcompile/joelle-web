@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../../islands/ScrollReveal.tsx';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import { type Lang, languages } from '../../../i18n/languages';
+import { useTranslation, getLocalizedContent, getLocalizedPath } from '../../../i18n/utils';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslation(lang);
+
+const projectFiles = import.meta.glob('../../../content/projects/*.json', { eager: true });
+const projects = Object.values(projectFiles)
+  .map((mod: any) => mod.default || mod)
+  .sort((a: any, b: any) => a.order - b.order);
+
+const categories = ['all', 'residential', 'commercial', 'hospitality'] as const;
+const categoryLabels: Record<string, string> = {
+  all: t('projects.filterAll'),
+  residential: t('projects.filterResidential'),
+  commercial: t('projects.filterCommercial'),
+  hospitality: t('projects.filterHospitality'),
+};
+
+const placeholderImages = [
+  'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=75',
+  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=75',
+  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=75',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=75',
+  'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=75',
+];
+---
+
+<BaseLayout title={t('nav.projects')} description={t('projects.title')} lang={lang}>
+  <div class="pt-28 pb-20 lg:pb-28 px-6 lg:px-8 max-w-[1440px] mx-auto">
+    <SectionHeading title={t('projects.title')} />
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap gap-4 mb-12" role="tablist">
+      {categories.map((cat) => (
+        <button
+          data-filter={cat}
+          class="text-sm font-sans font-medium uppercase tracking-wide px-4 py-2 border-b-2 border-transparent transition-colors duration-200 cursor-pointer hover:text-[var(--accent)] data-[active]:text-[var(--accent)] data-[active]:border-[var(--accent)]"
+          role="tab"
+          aria-selected={cat === 'all' ? 'true' : 'false'}
+        >
+          {categoryLabels[cat]}
+        </button>
+      ))}
+    </div>
+
+    <!-- Project Grid -->
+    <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {projects.map((project: any, i: number) => (
+        <ScrollReveal client:visible delay={i * 0.1}>
+          <a
+            href={getLocalizedPath(lang, `/projects/${project.slug}`)}
+            class="group block overflow-hidden cursor-pointer"
+            data-category={project.category}
+          >
+            <div class="relative aspect-[4/5] overflow-hidden bg-[var(--surface-alt)]">
+              <img
+                src={placeholderImages[i % placeholderImages.length]}
+                alt={getLocalizedContent(project.title, lang)}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                loading="lazy"
+              />
+            </div>
+            <div class="mt-4">
+              <h3 class="font-serif text-xl font-semibold">
+                {getLocalizedContent(project.title, lang)}
+              </h3>
+              <p class="text-sm text-[var(--text-muted)] mt-1">
+                {getLocalizedContent(project.location, lang)} — {project.year}
+              </p>
+            </div>
+          </a>
+        </ScrollReveal>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll('[data-filter]');
+  const cards = document.querySelectorAll('[data-category]');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      buttons.forEach((b) => {
+        b.removeAttribute('data-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.setAttribute('data-active', '');
+      btn.setAttribute('aria-selected', 'true');
+
+      cards.forEach((card) => {
+        const parent = card.closest('[class*="opacity"]')?.parentElement || card.parentElement;
+        if (!parent) return;
+
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          (parent as HTMLElement).style.display = '';
+        } else {
+          (parent as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Set initial active state
+  buttons[0]?.setAttribute('data-active', '');
+</script>

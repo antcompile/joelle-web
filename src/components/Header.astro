@@ -1,0 +1,132 @@
+---
+import { type Lang } from '../i18n/languages';
+import { useTranslation } from '../i18n/utils';
+import { mainNav } from '../data/navigation';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from '../islands/ThemeToggle.tsx';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const t = useTranslation(lang);
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-300"
+  data-transparent="true"
+>
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between py-8">
+    <!-- Logo -->
+    <a href={`/${lang}/`} class="font-serif font-normal text-lg tracking-[0.4em] uppercase">
+      Joelle Trad
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+      {mainNav.map((item) => (
+        <a
+          href={item.href(lang)}
+          class:list={[
+            'text-xs font-sans font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-[var(--accent)] cursor-pointer',
+            currentPath === item.href(lang) ? 'text-[var(--text-primary)] border-b border-[var(--accent)] pb-1' : 'text-[var(--text-secondary)]',
+          ]}
+        >
+          {t(item.key)}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right side: Lang + Theme + Mobile toggle -->
+    <div class="flex items-center gap-4">
+      <LanguageSwitcher lang={lang} />
+      <ThemeToggle client:load />
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobile-menu-toggle"
+        class="lg:hidden p-2 cursor-pointer"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-[var(--bg)] z-[100] flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
+    aria-hidden="true"
+  >
+    <button
+      id="mobile-menu-close"
+      class="absolute top-6 right-6 p-2 cursor-pointer"
+      aria-label="Close menu"
+    >
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    {mainNav.map((item) => (
+      <a
+        href={item.href(lang)}
+        class="font-serif text-2xl tracking-wide hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+      >
+        {t(item.key)}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileClose = document.getElementById('mobile-menu-close');
+
+  // Scroll-aware header
+  const hero = document.querySelector('[data-hero]');
+  if (hero && header) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          header.setAttribute('data-transparent', 'true');
+          header.classList.remove('bg-[var(--surface)]', 'shadow-sm');
+          header.classList.add('text-white');
+        } else {
+          header.setAttribute('data-transparent', 'false');
+          header.classList.add('bg-[var(--surface)]', 'shadow-sm');
+          header.classList.remove('text-white');
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+  } else if (header) {
+    header.setAttribute('data-transparent', 'false');
+    header.classList.add('bg-[var(--surface)]', 'shadow-sm');
+  }
+
+  // Mobile menu toggle
+  mobileToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
+    mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  });
+
+  mobileClose?.addEventListener('click', () => {
+    mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
+    mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  });
+</script>

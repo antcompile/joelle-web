@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../islands/ScrollReveal.tsx';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { type Lang, languages } from '../../i18n/languages';
+import { useTranslation, getLocalizedContent, getLocalizedPath } from '../../i18n/utils';
+import { services } from '../../data/services';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslation(lang);
+
+const processSteps = [
+  { key: 'process.discovery', number: '01', desc: { fr: 'Comprendre vos besoins, votre style de vie et vos aspirations.', en: 'Understanding your needs, lifestyle, and aspirations.', ar: 'فهم احتياجاتكم ونمط حياتكم وتطلعاتكم.' } },
+  { key: 'process.concept', number: '02', desc: { fr: 'Explorer les directions creatives, moodboards et esquisses.', en: 'Exploring creative directions, mood boards, and sketches.', ar: 'استكشاف التوجهات الإبداعية ولوحات المزاج والرسومات.' } },
+  { key: 'process.design', number: '03', desc: { fr: 'Plans detailles, selection des materiaux et specifications techniques.', en: 'Detailed plans, material selection, and technical specifications.', ar: 'مخططات تفصيلية واختيار المواد والمواصفات الفنية.' } },
+  { key: 'process.execution', number: '04', desc: { fr: 'Suivi de chantier, coordination des artisans et controle qualite.', en: 'Site supervision, artisan coordination, and quality control.', ar: 'إشراف ميداني وتنسيق الحرفيين ومراقبة الجودة.' } },
+  { key: 'process.handover', number: '05', desc: { fr: 'Livraison, mise en scene et accompagnement post-projet.', en: 'Delivery, staging, and post-project support.', ar: 'التسليم والتنسيق والدعم بعد المشروع.' } },
+];
+---
+
+<BaseLayout title={t('nav.services')} lang={lang}>
+  <div class="pt-28 pb-20 lg:pb-28">
+    <!-- Services Grid -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 mb-24">
+      <SectionHeading title={t('services.title')} />
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        {services.map((service, i) => (
+          <ScrollReveal client:visible delay={i * 0.15}>
+            <div class="border-t border-[var(--border)] pt-8">
+              <h3 class="font-serif text-2xl font-semibold mb-4">
+                {getLocalizedContent(service.title, lang)}
+              </h3>
+              <p class="text-[var(--text-secondary)] leading-relaxed mb-6">
+                {getLocalizedContent(service.description, lang)}
+              </p>
+              <ul class="space-y-2">
+                {getLocalizedContent({ fr: service.deliverables.fr.join('|||'), en: service.deliverables.en.join('|||'), ar: service.deliverables.ar.join('|||') }, lang).split('|||').map((item: string) => (
+                  <li class="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
+                    <span class="text-[var(--accent)] mt-1 flex-shrink-0">&#x2022;</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 bg-[var(--surface-alt)] py-20 lg:py-28 relative grain-overlay">
+      <ScrollReveal client:visible>
+        <SectionHeading title={t('about.approach')} />
+      </ScrollReveal>
+
+      <div class="space-y-12">
+        {processSteps.map((step, i) => (
+          <ScrollReveal client:visible delay={i * 0.1}>
+            <div class="flex items-start gap-6">
+              <span class="text-3xl font-serif font-bold text-[var(--accent)] flex-shrink-0 w-12">
+                {step.number}
+              </span>
+              <div>
+                <h4 class="font-sans font-medium text-lg">{t(step.key)}</h4>
+                <p class="text-[var(--text-secondary)] mt-1">{getLocalizedContent(step.desc, lang)}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 py-20 text-center">
+      <ScrollReveal client:visible>
+        <h2 class="font-serif text-2xl font-semibold mb-6">
+          {lang === 'fr' ? 'Discutons de votre projet' : lang === 'ar' ? 'لنناقش مشروعكم' : "Let's discuss your project"}
+        </h2>
+        <a href={getLocalizedPath(lang, '/contact')} class="btn-primary">
+          {t('common.getInTouch')}
+        </a>
+      </ScrollReveal>
+    </section>
+  </div>
+</BaseLayout>

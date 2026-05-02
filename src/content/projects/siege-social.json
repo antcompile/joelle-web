@@ -1,0 +1,29 @@
+{
+  "slug": "siege-social",
+  "title": {
+    "fr": "Siege Social",
+    "en": "Corporate Headquarters",
+    "ar": "المقر الرئيسي"
+  },
+  "description": {
+    "fr": "Un espace de travail qui equilibre collaboration et concentration. Materiaux nobles, acoustique soignee et zones de decompression pour un environnement productif et humain.",
+    "en": "A workspace balancing collaboration and focus. Noble materials, careful acoustics, and decompression zones for a productive, human-centered environment.",
+    "ar": "مساحة عمل توازن بين التعاون والتركيز. مواد نبيلة وصوتيات مدروسة ومناطق استرخاء لبيئة إنتاجية وإنسانية."
+  },
+  "location": {
+    "fr": "Dubai, EAU",
+    "en": "Dubai, UAE",
+    "ar": "دبي، الإمارات"
+  },
+  "category": "commercial",
+  "year": 2023,
+  "area_sqm": 800,
+  "scope": {
+    "fr": "Amenagement complet",
+    "en": "Complete fit-out",
+    "ar": "تجهيز كامل"
+  },
+  "images": ["hero.jpg", "open-space-01.jpg", "meeting-01.jpg", "detail-01.jpg"],
+  "featured": true,
+  "order": 4
+}

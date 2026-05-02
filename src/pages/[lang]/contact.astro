@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../islands/ScrollReveal.tsx';
+import ContactForm from '../../islands/ContactForm.tsx';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { type Lang, languages } from '../../i18n/languages';
+import { useTranslation, getLocalizedContent } from '../../i18n/utils';
+import { siteConfig } from '../../data/siteConfig';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslation(lang);
+
+const projectTypes = lang === 'fr'
+  ? ['Residentiel', 'Commercial', 'Consultation', 'Autre']
+  : lang === 'ar'
+  ? ['سكني', 'تجاري', 'استشارة', 'أخرى']
+  : ['Residential', 'Commercial', 'Consultation', 'Other'];
+
+const budgetRanges = ['< 50k €', '50k – 100k €', '100k – 250k €', '250k+ €'];
+---
+
+<BaseLayout title={t('nav.contact')} lang={lang}>
+  <div class="pt-40 pb-32 max-w-[1440px] mx-auto px-6 lg:px-12">
+    <div class="mb-24">
+      <h1 class="font-serif text-[clamp(2.5rem,5vw,3rem)] tracking-[0.1em]">{t('contact.title')}</h1>
+      <p class="mt-6 text-lg text-[var(--text-secondary)] max-w-2xl">{t('contact.heading')}</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8">
+      <!-- Form -->
+      <div class="lg:col-span-7 lg:pr-12">
+        <ScrollReveal client:visible>
+          <ContactForm
+            client:visible
+            lang={lang}
+            formspreeUrl={siteConfig.formspree.contact}
+            labels={{
+              name: t('contact.name'),
+              email: t('contact.email'),
+              projectType: t('contact.projectType'),
+              message: t('contact.message'),
+              budget: t('contact.budget'),
+              send: t('contact.send'),
+              success: t('contact.success'),
+              error: t('contact.error'),
+            }}
+            projectTypes={projectTypes}
+            budgetRanges={budgetRanges}
+          />
+        </ScrollReveal>
+      </div>
+
+      <!-- Info Card -->
+      <div class="lg:col-span-5">
+        <ScrollReveal client:visible delay={0.2}>
+          <div class="bg-[var(--surface)] border border-[var(--border)] p-12 h-full flex flex-col justify-between sticky top-28">
+            <div>
+              <div class="mb-12">
+                <h3 class="font-serif text-2xl tracking-[0.05em] mb-8">Studio</h3>
+                <a href={`mailto:${siteConfig.email}`} class="text-lg text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 cursor-pointer block mb-2">
+                  {siteConfig.email}
+                </a>
+                <p class="text-[var(--text-secondary)] mt-4">{getLocalizedContent(siteConfig.location, lang)}</p>
+              </div>
+
+              <div class="mb-12">
+                <h3 class="font-serif text-2xl tracking-[0.05em] mb-8">
+                  {lang === 'fr' ? 'Reseaux' : lang === 'ar' ? 'تواصل' : 'Connect'}
+                </h3>
+                <div class="flex gap-6">
+                  <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 cursor-pointer uppercase tracking-wider text-sm">
+                    Instagram
+                  </a>
+                  <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 cursor-pointer uppercase tracking-wider text-sm">
+                    LinkedIn
+                  </a>
+                  <a href={siteConfig.social.pinterest} target="_blank" rel="noopener noreferrer" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-300 cursor-pointer uppercase tracking-wider text-sm">
+                    Pinterest
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-12 border-t border-[var(--border)]">
+              <div class="flex items-center gap-4">
+                <div class="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse"></div>
+                <span class="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-secondary)]">
+                  {t('contact.availability')}
+                </span>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

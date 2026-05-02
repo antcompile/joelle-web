@@ -1,0 +1,74 @@
+---
+import { type Lang, languages } from '../i18n/languages';
+import { getDirection } from '../i18n/utils';
+import { siteConfig } from '../data/siteConfig';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  lang: Lang;
+}
+
+const { title, description, image, lang } = Astro.props;
+const dir = getDirection(lang);
+const fullTitle = `${title} | ${siteConfig.name}`;
+const metaDescription = description || '';
+---
+
+<!doctype html>
+<html lang={lang} dir={dir} data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={metaDescription} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:type" content="website" />
+    {image && <meta property="og:image" content={image} />}
+
+    <!-- Hreflang -->
+    {Object.keys(languages).map((l) => (
+      <link rel="alternate" hreflang={l} href={`${siteConfig.domain}/${l}${Astro.url.pathname.replace(/^\/(fr|en|ar)/, '')}`} />
+    ))}
+
+    <!-- Fonts preload -->
+    <link rel="preload" href="/fonts/cinzel-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/josefin-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+    {dir === 'rtl' && (
+      <>
+        <link rel="preload" href="/fonts/noto-naskh-arabic-700.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/fonts/noto-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin />
+      </>
+    )}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Theme initialization (prevent FOUC) -->
+    <script is:inline>
+      (function() {
+        const stored = localStorage.getItem('theme');
+        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-[var(--bg)] text-[var(--text-primary)] min-h-screen flex flex-col grain-overlay">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <Header lang={lang} currentPath={Astro.url.pathname} />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

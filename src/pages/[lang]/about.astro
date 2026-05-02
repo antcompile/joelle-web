@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../islands/ScrollReveal.tsx';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { type Lang, languages } from '../../i18n/languages';
+import { useTranslation, getLocalizedPath } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslation(lang);
+
+const processSteps = [
+  { key: 'process.discovery', number: '01' },
+  { key: 'process.concept', number: '02' },
+  { key: 'process.design', number: '03' },
+  { key: 'process.execution', number: '04' },
+  { key: 'process.handover', number: '05' },
+];
+---
+
+<BaseLayout title={t('nav.about')} lang={lang}>
+  <div class="pt-28 pb-20 lg:pb-28">
+    <!-- Portrait + Philosophy -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
+      <ScrollReveal client:visible>
+        <div class="aspect-[3/4] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
+            alt="Joelle Trad"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal client:visible delay={0.2}>
+        <div>
+          <h1 class="font-serif text-[clamp(2rem,4vw,3rem)] font-semibold mb-8">
+            {t('about.title')}
+          </h1>
+          <blockquote class="font-serif text-2xl leading-relaxed text-[var(--text-primary)] mb-8 border-s-2 border-[var(--accent)] ps-6">
+            "{t('about.teaser')}"
+          </blockquote>
+          <div class="space-y-4 text-[var(--text-secondary)] leading-relaxed max-w-prose">
+            <p>
+              {lang === 'fr'
+                ? "Architecte d'interieur basee entre Beyrouth et Paris, je cree des espaces qui conjuguent fonctionnalite, esthetique et emotion. Chaque projet est une conversation entre le lieu, les materiaux et les personnes qui l'habitent."
+                : lang === 'ar'
+                ? "مهندسة معمارية داخلية مقيمة بين بيروت وباريس، أصمم مساحات تجمع بين الوظيفة والجمالية والعاطفة. كل مشروع هو حوار بين المكان والمواد والأشخاص الذين يعيشون فيه."
+                : "Interior architect based between Beirut and Paris, I create spaces that combine functionality, aesthetics, and emotion. Every project is a conversation between the place, the materials, and the people who inhabit it."}
+            </p>
+            <p>
+              {lang === 'fr'
+                ? "Diplomee de l'Academie Libanaise des Beaux-Arts avec plus de dix ans d'experience, j'ai developpe une approche qui privilegie la materialite, la lumiere naturelle et la durabilite."
+                : lang === 'ar'
+                ? "خريجة الأكاديمية اللبنانية للفنون الجميلة مع أكثر من عشر سنوات من الخبرة، طورت منهجاً يركز على المادية والضوء الطبيعي والاستدامة."
+                : "Graduated from the Lebanese Academy of Fine Arts with over ten years of experience, I've developed an approach that prioritizes materiality, natural light, and sustainability."}
+            </p>
+          </div>
+        </div>
+      </ScrollReveal>
+    </section>
+
+    <!-- Process -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-8">
+      <ScrollReveal client:visible>
+        <SectionHeading title={t('about.approach')} />
+      </ScrollReveal>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+        {processSteps.map((step, i) => (
+          <ScrollReveal client:visible delay={i * 0.1}>
+            <div class="text-center md:text-start">
+              <span class="text-3xl font-serif font-bold text-[var(--accent)]">{step.number}</span>
+              <p class="mt-2 font-sans font-medium text-sm uppercase tracking-wide">
+                {t(step.key)}
+              </p>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 mt-24 text-center">
+      <ScrollReveal client:visible>
+        <a href={getLocalizedPath(lang, '/contact')} class="btn-primary">
+          {t('common.letsWork')}
+        </a>
+      </ScrollReveal>
+    </section>
+  </div>
+</BaseLayout>

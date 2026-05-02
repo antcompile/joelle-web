@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../../islands/ScrollReveal.tsx';
+import { type Lang, languages } from '../../../i18n/languages';
+import { useTranslation, getLocalizedContent, getLocalizedPath } from '../../../i18n/utils';
+
+const projectFiles = import.meta.glob('../../../content/projects/*.json', { eager: true });
+const allProjects = Object.values(projectFiles)
+  .map((mod: any) => mod.default || mod)
+  .sort((a: any, b: any) => a.order - b.order);
+
+export function getStaticPaths() {
+  const paths: any[] = [];
+  const langs = Object.keys(languages) as Lang[];
+
+  for (const lang of langs) {
+    for (const project of Object.values(import.meta.glob('../../../content/projects/*.json', { eager: true }))) {
+      const p = (project as any).default || project;
+      paths.push({ params: { lang, slug: p.slug } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: Lang; slug: string };
+const t = useTranslation(lang);
+
+const project = allProjects.find((p: any) => p.slug === slug);
+if (!project) return Astro.redirect(`/${lang}/projects`);
+
+const currentIndex = allProjects.indexOf(project);
+const nextProject = allProjects[(currentIndex + 1) % allProjects.length];
+
+const galleryImages = [
+  'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80',
+  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80',
+  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=75',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=75',
+];
+---
+
+<BaseLayout
+  title={getLocalizedContent(project.title, lang)}
+  description={getLocalizedContent(project.description, lang)}
+  lang={lang}
+>
+  <!-- Hero Image -->
+  <section class="pt-20">
+    <div class="w-full aspect-[16/9] max-h-[70vh] overflow-hidden">
+      <img
+        src={galleryImages[0]}
+        alt={getLocalizedContent(project.title, lang)}
+        class="w-full h-full object-cover"
+      />
+    </div>
+  </section>
+
+  <!-- Metadata -->
+  <section class="max-w-[1440px] mx-auto px-6 lg:px-8 py-8 border-b border-[var(--border)]">
+    <div class="flex flex-wrap gap-8 text-sm text-[var(--text-secondary)]">
+      <div>
+        <span class="text-[var(--text-muted)] uppercase tracking-wide text-xs">{t('projects.location')}</span>
+        <p class="mt-1 font-medium">{getLocalizedContent(project.location, lang)}</p>
+      </div>
+      <div>
+        <span class="text-[var(--text-muted)] uppercase tracking-wide text-xs">{t('projects.year')}</span>
+        <p class="mt-1 font-medium" dir="ltr">{project.year}</p>
+      </div>
+      <div>
+        <span class="text-[var(--text-muted)] uppercase tracking-wide text-xs">{t('projects.area')}</span>
+        <p class="mt-1 font-medium" dir="ltr">{project.area_sqm} m&sup2;</p>
+      </div>
+      <div>
+        <span class="text-[var(--text-muted)] uppercase tracking-wide text-xs">{t('projects.scope')}</span>
+        <p class="mt-1 font-medium">{getLocalizedContent(project.scope, lang)}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Description + Gallery -->
+  <section class="max-w-[1440px] mx-auto px-6 lg:px-8 py-16 lg:py-24">
+    <ScrollReveal client:visible>
+      <div class="max-w-3xl">
+        <h1 class="font-serif text-[clamp(2rem,4vw,3rem)] font-semibold mb-6">
+          {getLocalizedContent(project.title, lang)}
+        </h1>
+        <p class="text-lg text-[var(--text-secondary)] leading-relaxed">
+          {getLocalizedContent(project.description, lang)}
+        </p>
+      </div>
+    </ScrollReveal>
+
+    <!-- Image Gallery -->
+    <div class="mt-16 space-y-8">
+      <ScrollReveal client:visible>
+        <img
+          src={galleryImages[1]}
+          alt=""
+          class="w-full aspect-[16/9] object-cover"
+          loading="lazy"
+        />
+      </ScrollReveal>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <ScrollReveal client:visible delay={0}>
+          <img
+            src={galleryImages[2]}
+            alt=""
+            class="w-full aspect-[4/5] object-cover"
+            loading="lazy"
+          />
+        </ScrollReveal>
+        <ScrollReveal client:visible delay={0.15}>
+          <img
+            src={galleryImages[3]}
+            alt=""
+            class="w-full aspect-[4/5] object-cover"
+            loading="lazy"
+          />
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- Next Project -->
+  {nextProject && (
+    <section class="border-t border-[var(--border)] py-16 lg:py-24">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
+        <p class="text-sm text-[var(--text-muted)] uppercase tracking-wide mb-4">{t('projects.next')}</p>
+        <a
+          href={getLocalizedPath(lang, `/projects/${nextProject.slug}`)}
+          class="group flex items-center gap-6 cursor-pointer"
+        >
+          <div class="w-24 h-24 overflow-hidden flex-shrink-0">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=200&q=75"
+              alt={getLocalizedContent(nextProject.title, lang)}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          </div>
+          <div>
+            <h3 class="font-serif text-xl font-semibold group-hover:text-[var(--accent)] transition-colors duration-200">
+              {getLocalizedContent(nextProject.title, lang)}
+            </h3>
+            <p class="text-sm text-[var(--text-muted)] mt-1">
+              {getLocalizedContent(nextProject.location, lang)} — {nextProject.year}
+            </p>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <!-- Back link -->
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-8 pb-16">
+    <a href={getLocalizedPath(lang, '/projects')} class="text-sm text-[var(--accent)] hover:underline cursor-pointer">
+      &larr; {t('projects.back')}
+    </a>
+  </div>
+</BaseLayout>

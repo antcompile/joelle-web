@@ -1,0 +1,29 @@
+{
+  "slug": "loft-parisien",
+  "title": {
+    "fr": "Loft Parisien",
+    "en": "Parisian Loft",
+    "ar": "لوفت باريسي"
+  },
+  "description": {
+    "fr": "Transformation d'un ancien atelier en loft lumineux. Poutres apparentes, beton cire et touches de laiton pour un equilibre entre brut et raffine.",
+    "en": "Transformation of a former workshop into a luminous loft. Exposed beams, polished concrete, and brass accents for a balance between raw and refined.",
+    "ar": "تحويل ورشة عمل سابقة إلى لوفت مضيء. عوارض مكشوفة وخرسانة مصقولة ولمسات نحاسية لتوازن بين الخام والراقي."
+  },
+  "location": {
+    "fr": "Paris, France",
+    "en": "Paris, France",
+    "ar": "باريس، فرنسا"
+  },
+  "category": "residential",
+  "year": 2023,
+  "area_sqm": 120,
+  "scope": {
+    "fr": "Renovation complete",
+    "en": "Full renovation",
+    "ar": "تجديد كامل"
+  },
+  "images": ["hero.jpg", "main-space-01.jpg", "kitchen-01.jpg", "detail-01.jpg"],
+  "featured": true,
+  "order": 2
+}

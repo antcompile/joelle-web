@@ -1,0 +1,29 @@
+{
+  "slug": "boutique-hotel",
+  "title": {
+    "fr": "Lobby Hotel Boutique",
+    "en": "Boutique Hotel Lobby",
+    "ar": "لوبي فندق بوتيكي"
+  },
+  "description": {
+    "fr": "Un lobby d'hotel boutique qui invite au voyage. Pierre locale, textiles artisanaux et vegetation luxuriante creent une atmosphere d'oasis urbaine.",
+    "en": "A boutique hotel lobby that invites wanderlust. Local stone, artisanal textiles, and lush greenery create an urban oasis atmosphere.",
+    "ar": "لوبي فندق بوتيكي يدعو للاستكشاف. حجر محلي وأقمشة حرفية ونباتات خضراء تخلق جو واحة حضرية."
+  },
+  "location": {
+    "fr": "Byblos, Liban",
+    "en": "Byblos, Lebanon",
+    "ar": "جبيل، لبنان"
+  },
+  "category": "hospitality",
+  "year": 2024,
+  "area_sqm": 200,
+  "scope": {
+    "fr": "Design d'interieur et mobilier",
+    "en": "Interior design and furniture",
+    "ar": "تصميم داخلي وأثاث"
+  },
+  "images": ["hero.jpg", "reception-01.jpg", "lounge-01.jpg", "detail-01.jpg"],
+  "featured": true,
+  "order": 3
+}

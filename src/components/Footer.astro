@@ -1,0 +1,88 @@
+---
+import { type Lang } from '../i18n/languages';
+import { useTranslation } from '../i18n/utils';
+import { siteConfig } from '../data/siteConfig';
+import { mainNav } from '../data/navigation';
+import { getLocalizedContent } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslation(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[var(--footer-bg)] text-cream/90 pt-32 pb-12">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <!-- Logo & Tagline -->
+      <div class="md:col-span-1">
+        <a href={`/${lang}/`} class="font-serif font-normal text-lg tracking-[0.2em] uppercase text-cream cursor-pointer block mb-4">
+          Joelle Trad
+        </a>
+        <p class="text-sm text-cream/50 leading-relaxed">
+          {t('footer.tagline')}
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3 class="text-sm font-sans font-medium uppercase tracking-wide text-cream/60 mb-4">Navigation</h3>
+        <ul class="space-y-2">
+          {mainNav.map((item) => (
+            <li>
+              <a href={item.href(lang)} class="text-sm text-cream/80 hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer">
+                {t(item.key)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Social -->
+      <div>
+        <h3 class="text-sm font-sans font-medium uppercase tracking-wide text-cream/60 mb-4">Social</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="text-sm text-cream/80 hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer">
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="text-sm text-cream/80 hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer">
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href={siteConfig.social.pinterest} target="_blank" rel="noopener noreferrer" class="text-sm text-cream/80 hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer">
+              Pinterest
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-sm font-sans font-medium uppercase tracking-wide text-cream/60 mb-4">{t('nav.contact')}</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href={`mailto:${siteConfig.email}`} class="text-sm text-cream/80 hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer">
+              {siteConfig.email}
+            </a>
+          </li>
+          <li class="text-sm text-cream/80" dir="ltr">{siteConfig.phone}</li>
+          <li class="text-sm text-cream/80">{getLocalizedContent(siteConfig.location, lang)}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-cream/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-cream/40">
+        &copy; {year} {siteConfig.name}. {t('footer.rights')}.
+      </p>
+    </div>
+  </div>
+</footer>

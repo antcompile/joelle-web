@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact - JOELLE TRAD</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Josefin+Sans:ital,wght@0,100..700;1,100..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-secondary": "#ffffff",
+                            "primary-fixed-dim": "#ffb598",
+                            "on-primary-fixed": "#370e00",
+                            "outline-variant": "#d8c2ba",
+                            "on-tertiary": "#ffffff",
+                            "on-surface": "#1e1b19",
+                            "on-secondary-container": "#5b6a2d",
+                            "outline": "#86736c",
+                            "inverse-on-surface": "#f7efeb",
+                            "error-container": "#ffdad6",
+                            "on-error-container": "#93000a",
+                            "on-primary-container": "#fffbff",
+                            "tertiary-container": "#cca72f",
+                            "inverse-primary": "#ffb598",
+                            "primary": "#8b4b2f",
+                            "error": "#ba1a1a",
+                            "secondary-container": "#d8eb9f",
+                            "surface-bright": "#fff8f5",
+                            "background": "#fff8f5",
+                            "surface-container": "#f4ece8",
+                            "secondary-fixed-dim": "#bcce86",
+                            "on-background": "#1e1b19",
+                            "surface-container-lowest": "#ffffff",
+                            "surface": "#fff8f5",
+                            "tertiary-fixed": "#ffe088",
+                            "surface-container-highest": "#e9e1dd",
+                            "on-tertiary-fixed": "#241a00",
+                            "on-tertiary-fixed-variant": "#574500",
+                            "on-primary-fixed-variant": "#71361d",
+                            "on-secondary-fixed-variant": "#3e4c12",
+                            "surface-container-high": "#eee7e3",
+                            "on-primary": "#ffffff",
+                            "primary-container": "#a86245",
+                            "on-surface-variant": "#53433d",
+                            "on-tertiary-container": "#4e3d00",
+                            "surface-tint": "#8e4d31",
+                            "surface-variant": "#e9e1dd",
+                            "surface-dim": "#e0d8d5",
+                            "primary-fixed": "#ffdbce",
+                            "secondary-fixed": "#d8eb9f",
+                            "tertiary-fixed-dim": "#e9c349",
+                            "surface-container-low": "#faf2ee",
+                            "inverse-surface": "#33302d",
+                            "on-secondary-fixed": "#161e00",
+                            "on-error": "#ffffff",
+                            "tertiary": "#735c00",
+                            "secondary": "#556428"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "gutter": "32px",
+                            "section-gap": "128px",
+                            "container-max": "1440px",
+                            "unit": "8px",
+                            "margin-edge": "64px"
+                    },
+                    "fontFamily": {
+                            "body-md": ["Josefin Sans"],
+                            "body-lg": ["Josefin Sans"],
+                            "label-sm": ["Josefin Sans"],
+                            "headline-xl": ["Cinzel"],
+                            "headline-md": ["Cinzel"],
+                            "headline-lg": ["Cinzel"]
+                    },
+                    "fontSize": {
+                            "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                            "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "300"}],
+                            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                            "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "400"}],
+                            "headline-md": ["24px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                            "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "0.05em", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .paper-grain {
+            position: relative;
+        }
+        .paper-grain::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased paper-grain min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest border-b border-surface-container-highest transition-all duration-700 ease-in-out fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-12 py-8 max-w-[1440px] mx-auto">
+<div class="font-headline-lg text-headline-lg tracking-[0.4em] text-on-surface">
+                JOELLE TRAD
+            </div>
+<nav class="hidden md:flex gap-8">
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Home</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Projects</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">About</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Services</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface font-medium border-b border-[#C67B5C] pb-1" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="font-label-sm text-label-sm text-on-surface-variant">FR | EN | AR</span>
+<button class="text-on-surface-variant hover:text-[#C67B5C] transition-colors duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-40 pb-section-gap px-12 max-w-[1440px] mx-auto w-full">
+<div class="mb-24">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6">Contact</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                We welcome inquiries regarding residential and commercial architecture projects. Please provide details below, and our studio will respond promptly.
+            </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Contact Form (60%) -->
+<div class="lg:col-span-7 pr-0 lg:pr-12">
+<form class="space-y-16">
+<div class="relative">
+<label class="font-label-sm text-label-sm text-[#C67B5C] uppercase block mb-4" for="name">Full Name</label>
+<input class="w-full bg-transparent border-0 border-b border-outline text-on-surface font-body-md text-body-md py-4 px-0 focus:ring-0 focus:border-[#C67B5C] transition-colors rounded-none placeholder:text-on-surface-variant/50" id="name" name="name" placeholder="Enter your full name" type="text"/>
+</div>
+<div class="relative">
+<label class="font-label-sm text-label-sm text-[#C67B5C] uppercase block mb-4" for="email">Email Address</label>
+<input class="w-full bg-transparent border-0 border-b border-outline text-on-surface font-body-md text-body-md py-4 px-0 focus:ring-0 focus:border-[#C67B5C] transition-colors rounded-none placeholder:text-on-surface-variant/50" id="email" name="email" placeholder="Enter your email address" type="email"/>
+</div>
+<div class="relative">
+<label class="font-label-sm text-label-sm text-[#C67B5C] uppercase block mb-4" for="project-type">Project Type</label>
+<select class="w-full bg-transparent border-0 border-b border-outline text-on-surface font-body-md text-body-md py-4 px-0 focus:ring-0 focus:border-[#C67B5C] transition-colors rounded-none appearance-none" id="project-type" name="project-type">
+<option class="text-on-surface-variant/50" disabled="" selected="" value="">Select a project type</option>
+<option class="text-on-surface" value="residential">Residential</option>
+<option class="text-on-surface" value="commercial">Commercial</option>
+<option class="text-on-surface" value="hospitality">Hospitality</option>
+<option class="text-on-surface" value="consultation">Consultation</option>
+</select>
+<div class="absolute right-0 bottom-4 pointer-events-none">
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+</div>
+<div class="relative">
+<label class="font-label-sm text-label-sm text-[#C67B5C] uppercase block mb-4" for="message">Message Details</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline text-on-surface font-body-md text-body-md py-4 px-0 focus:ring-0 focus:border-[#C67B5C] transition-colors rounded-none resize-none placeholder:text-on-surface-variant/50" id="message" name="message" placeholder="Describe your project, location, and timeline..." rows="4"></textarea>
+</div>
+<div>
+<button class="bg-[#C67B5C] text-white font-label-sm text-label-sm uppercase tracking-widest py-6 px-12 hover:bg-primary transition-colors duration-300 w-full sm:w-auto" type="submit">
+                            Submit Inquiry
+                        </button>
+</div>
+</form>
+</div>
+<!-- Right Column: Info Card (40%) -->
+<div class="lg:col-span-5 mt-16 lg:mt-0">
+<div class="bg-surface-container-lowest border border-surface-container-highest p-12 h-full flex flex-col justify-between">
+<div>
+<div class="mb-12">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-8">Studio</h3>
+<a class="font-body-lg text-body-lg text-on-surface-variant hover:text-[#C67B5C] transition-colors inline-block mb-2" href="mailto:joelle@joelletrad.com">joelle@joelletrad.com</a>
+<p class="font-body-md text-body-md text-on-surface-variant mt-4">Beirut / Paris</p>
+</div>
+<div class="mb-12">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-8">Connect</h3>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-[#C67B5C] transition-colors font-body-md text-body-md uppercase tracking-wider" href="#">Instagram</a>
+<a class="text-on-surface-variant hover:text-[#C67B5C] transition-colors font-body-md text-body-md uppercase tracking-wider" href="#">LinkedIn</a>
+<a class="text-on-surface-variant hover:text-[#C67B5C] transition-colors font-body-md text-body-md uppercase tracking-wider" href="#">Pinterest</a>
+</div>
+</div>
+</div>
+<div class="pt-12 border-t border-surface-container-highest">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-[#C67B5C] animate-pulse"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Currently accepting new projects</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background text-on-primary pt-32 pb-12 w-full mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-16 max-w-[1440px] mx-auto px-12">
+<div class="md:col-span-1">
+<span class="font-headline-lg text-lg tracking-[0.2em] text-on-primary mb-4 block">JOELLE TRAD</span>
+<p class="font-body-md text-body-md text-on-surface-variant/70 text-sm leading-relaxed mt-6">
+                    Interior Architecture &amp; Design Studio.<br/>Crafting spaces of enduring elegance.
+                </p>
+</div>
+<div class="md:col-span-2 grid grid-cols-2 gap-8">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-primary mb-6 text-sm">Links</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Home</a></li>
+<li><a class="font-body-md text-body-md text-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Projects</a></li>
+<li><a class="font-body-md text-body-md text-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">About</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-primary mb-6 text-sm">Social</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Instagram</a></li>
+<li><a class="font-body-md text-body-md text-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Pinterest</a></li>
+<li><a class="font-body-md text-body-md text-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">LinkedIn</a></li>
+</ul>
+</div>
+</div>
+<div class="md:col-span-1 flex flex-col justify-between">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-primary mb-6 text-sm">Legal</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-surface-variant hover:text-[#C67B5C] transition-colors duration-300" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-12 mt-24 pt-8 border-t border-surface-container-highest/20">
+<p class="font-body-md text-body-md text-surface-variant/50 text-xs">
+                © 2024 JOELLE TRAD INTERIOR ARCHITECTURE. ALL RIGHTS RESERVED.
+            </p>
+</div>
+</footer>
+</body></html>
