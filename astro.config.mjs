@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://joelletrad.com',
+  site: 'https://antcompile.github.io',
+  base: '/joelle-web',
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

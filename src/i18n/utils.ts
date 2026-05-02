@@ -11,9 +11,12 @@ export function useTranslation(lang: Lang) {
   };
 }
 
+const BASE = import.meta.env.BASE_URL ?? '/';
+
 export function getLocalizedPath(lang: Lang, path: string): string {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `/${lang}${cleanPath}`;
+  const base = BASE.endsWith('/') ? BASE.slice(0, -1) : BASE;
+  return `${base}/${lang}${cleanPath}`;
 }
 
 export function getDirection(lang: Lang): 'ltr' | 'rtl' {
