@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+@theme {
+  --color-cream: #F5F0E1;
+  --color-sand: #D4C4A8;
+  --color-sand-light: #EDE7D9;
+  --color-terracotta: #C67B5C;
+  --color-terracotta-dark: #A8654A;
+  --color-terracotta-light: #D4896A;
+  --color-olive: #6B7B3C;
+  --color-olive-light: #8FA872;
+  --color-gold: #D4AF37;
+  --color-gold-dark: #BFA030;
+  --color-gold-light: #E5C553;
+  --color-warm-black: #1C1917;
+  --color-warm-900: #2A2522;
+  --color-warm-800: #342E2A;
+  --color-warm-700: #57504A;
+  --color-warm-600: #7A6F65;
+  --color-warm-500: #8C8279;
+  --color-warm-400: #BFB5A8;
+  --color-warm-100: #F5F0E1;
+
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-sans: 'Josefin Sans', system-ui, sans-serif;
+  --font-ar-serif: 'Noto Naskh Arabic', serif;
+  --font-ar-sans: 'Noto Sans Arabic', sans-serif;
+}
+
 /* ============================================
    THEME SYSTEM — Nature Distilled Gallery
    ============================================ */
