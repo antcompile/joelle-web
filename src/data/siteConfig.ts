@@ -9,7 +9,7 @@ export const siteConfig = {
     ar: 'العمارة الداخلية والأثاث متعدد الوظائف',
   } as Record<Lang, string>,
   email: 'joelle.trad@outlook.com',
-  phone: '+33 7 82 94 59 96',
+  phone: '',
   location: {
     fr: 'Paris, France',
     en: 'Paris, France',
