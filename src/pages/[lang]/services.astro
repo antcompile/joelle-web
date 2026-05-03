@@ -144,16 +144,46 @@ const t = useTranslation(lang);
             </div>
           </div>
 
-          <div class="order-1 lg:order-2 aspect-[4/3] overflow-hidden">
-            <img
-              src="/joelle-web/images/services/furniture-nest.jpg"
-              alt={t('services.furniture')}
-              class="w-full h-full object-cover"
-            />
-            <!-- Video placeholder -->
-            <div class="mt-6 aspect-video bg-[var(--surface-alt)] flex items-center justify-center border border-[var(--border)]">
-              <p class="text-sm text-[var(--text-muted)]">Video — Coming soon</p>
+          <div class="order-1 lg:order-2">
+            <!-- Video Preview (autoplay, muted, loop) -->
+            <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" id="video-preview-container">
+              <video
+                id="video-preview"
+                class="w-full h-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              >
+                <source src="/joelle-web/videos/furniture-preview.mp4" type="video/mp4" />
+              </video>
+              <!-- Play button overlay -->
+              <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors duration-300">
+                <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-6 h-6 text-[var(--text-primary)] ms-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Video Modal (fullscreen with controls) -->
+          <div id="video-modal" class="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+            <button id="video-modal-close" class="absolute top-6 right-6 text-white/80 hover:text-white cursor-pointer z-10 p-2">
+              <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <video
+              id="video-fullscreen"
+              class="w-full max-w-5xl max-h-[85vh] object-contain"
+              controls
+              preload="none"
+            >
+              <source src="/joelle-web/videos/furniture-preview.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </ScrollReveal>
@@ -172,3 +202,37 @@ const t = useTranslation(lang);
     </section>
   </div>
 </BaseLayout>
+
+<script>
+  const previewContainer = document.getElementById('video-preview-container');
+  const modal = document.getElementById('video-modal');
+  const modalClose = document.getElementById('video-modal-close');
+  const fullscreenVideo = document.getElementById('video-fullscreen') as HTMLVideoElement | null;
+  const previewVideo = document.getElementById('video-preview') as HTMLVideoElement | null;
+
+  previewContainer?.addEventListener('click', () => {
+    if (!modal || !fullscreenVideo) return;
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+    fullscreenVideo.currentTime = previewVideo?.currentTime || 0;
+    fullscreenVideo.muted = false;
+    fullscreenVideo.play();
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal() {
+    if (!modal || !fullscreenVideo) return;
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    fullscreenVideo.pause();
+    document.body.style.overflow = '';
+  }
+
+  modalClose?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
