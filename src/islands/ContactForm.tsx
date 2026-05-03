@@ -100,7 +100,7 @@ export default function ContactForm({ lang, formspreeUrl, labels, projectTypes, 
                 required
                 className="form-input bg-transparent cursor-pointer"
               >
-                <option value="">—</option>
+                <option value="">-</option>
                 {projectTypes.map((type) => (
                   <option key={type} value={type}>{type}</option>
                 ))}
@@ -114,7 +114,7 @@ export default function ContactForm({ lang, formspreeUrl, labels, projectTypes, 
                 name="budget"
                 className="form-input bg-transparent cursor-pointer"
               >
-                <option value="">—</option>
+                <option value="">-</option>
                 {budgetRanges.map((range) => (
                   <option key={range} value={range}>{range}</option>
                 ))}

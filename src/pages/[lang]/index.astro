@@ -59,7 +59,7 @@ const basePath = import.meta.env.BASE_URL;
       <ScrollReveal client:visible delay={0}>
         <a href={getLocalizedPath(lang, '/services')} class="group block relative aspect-[4/5] overflow-hidden cursor-pointer">
           <img
-            src="/joelle-web/images/services/architecture.jpg"
+            src="/joelle-web/images/services/architecture-sketch.jpg"
             alt={t('services.architecture')}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             loading="lazy"
@@ -80,7 +80,7 @@ const basePath = import.meta.env.BASE_URL;
       <ScrollReveal client:visible delay={0.15}>
         <a href={getLocalizedPath(lang, '/services')} class="group block relative aspect-[4/5] overflow-hidden cursor-pointer">
           <img
-            src="/joelle-web/images/services/furniture-nest.jpg"
+            src="/joelle-web/images/services/furniture-sketch.jpg"
             alt={t('services.furniture')}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             loading="lazy"
@@ -111,7 +111,7 @@ const basePath = import.meta.env.BASE_URL;
             "{t('about.teaser')}"
           </blockquote>
           <p class="text-[var(--text-secondary)] mb-10 max-w-prose leading-relaxed">
-            Joelle Trad — {getLocalizedContent(siteConfig.tagline, lang)}
+            Joelle Trad - {getLocalizedContent(siteConfig.tagline, lang)}
           </p>
           <a href={getLocalizedPath(lang, '/about')} class="btn-secondary">
             {t('about.learnMore')}

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../../islands/ScrollReveal.tsx';
+import ProjectGallery from '../../../islands/ProjectGallery.tsx';
 import { type Lang, languages } from '../../../i18n/languages';
-import { useTranslation, getLocalizedPath } from '../../../i18n/utils';
+import { useTranslation } from '../../../i18n/utils';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({ params: { lang } }));
@@ -18,29 +19,13 @@ const categoryLabels: Record<string, string> = {
   commercial: t('projects.filterCommercial'),
 };
 
-const residentialImages = [
-  '/joelle-web/images/projects/residential/bedroom-pink.jpg',
-  '/joelle-web/images/projects/residential/bedroom-elegant.jpg',
-  '/joelle-web/images/projects/residential/room-newyork.jpg',
-  '/joelle-web/images/projects/residential/living-modern.jpg',
-  '/joelle-web/images/projects/residential/living-library.jpg',
-  '/joelle-web/images/projects/residential/bedroom-tropical.jpg',
-  '/joelle-web/images/projects/residential/salon-white.jpg',
-  '/joelle-web/images/projects/residential/outdoor-pool.jpg',
-  '/joelle-web/images/projects/residential/outdoor-terrace.jpg',
-];
+const residentialImages = Array.from({ length: 10 }, (_, i) =>
+  `/joelle-web/images/projects/residential/${String(i + 1).padStart(2, '0')}.jpg`
+);
 
-const commercialImages = [
-  '/joelle-web/images/projects/commercial/boutique-1.jpg',
-  '/joelle-web/images/projects/commercial/boutique-2.jpg',
-  '/joelle-web/images/projects/commercial/boutique-3.jpg',
-  '/joelle-web/images/projects/commercial/office-1.jpg',
-  '/joelle-web/images/projects/commercial/office-2.jpg',
-  '/joelle-web/images/projects/commercial/meeting.jpg',
-  '/joelle-web/images/projects/commercial/bar-1.jpg',
-  '/joelle-web/images/projects/commercial/bar-2.jpg',
-  '/joelle-web/images/projects/commercial/bar-3.jpg',
-];
+const commercialImages = Array.from({ length: 9 }, (_, i) =>
+  `/joelle-web/images/projects/commercial/${String(i + 1).padStart(2, '0')}.jpg`
+);
 ---
 
 <BaseLayout title={t('nav.projects')} description={t('projects.title')} lang={lang}>
@@ -73,28 +58,13 @@ const commercialImages = [
           <h2 class="font-serif text-2xl tracking-wide mb-4">{t('projects.filterResidential')}</h2>
           <p class="text-[var(--text-secondary)] max-w-2xl leading-relaxed">
             {lang === 'fr'
-              ? "Chaque projet est une reponse unique a une maniere d'habiter. Entre volumes, matieres et lumiere, ces espaces racontent une histoire — celle de leurs occupants."
-              : "Each project is a unique response to a way of living. Between volumes, materials and light, these spaces tell a story — that of their occupants."}
+              ? "Chaque projet est une reponse unique a une maniere d'habiter. Entre volumes, matieres et lumiere, ces espaces racontent une histoire - celle de leurs occupants. Pensees dans le detail et concues avec precision, ces realisations traduisent un equilibre entre esthetique, usage et emotion."
+              : "Each project is a unique response to a way of living. Between volumes, materials and light, these spaces tell a story - that of their occupants. Designed with attention to detail and precision, these creations translate a balance between aesthetics, use and emotion."}
           </p>
         </div>
       </ScrollReveal>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        {residentialImages.map((img, i) => (
-          <ScrollReveal client:visible delay={i * 0.08}>
-            <div class="group overflow-hidden cursor-pointer" data-category="residential">
-              <div class="aspect-[4/3] overflow-hidden">
-                <img
-                  src={img}
-                  alt=""
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </ScrollReveal>
-        ))}
-      </div>
+      <ProjectGallery client:visible images={residentialImages} />
     </div>
 
     <!-- Commercial Section -->
@@ -110,22 +80,7 @@ const commercialImages = [
         </div>
       </ScrollReveal>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        {commercialImages.map((img, i) => (
-          <ScrollReveal client:visible delay={i * 0.08}>
-            <div class="group overflow-hidden cursor-pointer" data-category="commercial">
-              <div class="aspect-[4/3] overflow-hidden">
-                <img
-                  src={img}
-                  alt=""
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </ScrollReveal>
-        ))}
-      </div>
+      <ProjectGallery client:visible images={commercialImages} />
     </div>
   </div>
 </BaseLayout>
