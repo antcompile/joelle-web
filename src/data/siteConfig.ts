@@ -1,24 +1,23 @@
 import type { Lang } from '../i18n/languages';
 
 export const siteConfig = {
-  name: 'Joelle Trad',
-  domain: 'joelletrad.com',
+  name: 'PLUS EN MOINS',
+  domain: 'plusenmoins.com',
   tagline: {
-    fr: 'Architecture & Design Interieur',
-    en: 'Interior Architecture & Design',
-    ar: 'العمارة الداخلية والتصميم',
+    fr: 'Architecture d\'interieur & Mobilier multifonctionnel',
+    en: 'Interior Architecture & Multifunctional Furniture',
+    ar: 'العمارة الداخلية والأثاث متعدد الوظائف',
   } as Record<Lang, string>,
-  email: 'contact@joelletrad.com',
-  phone: '+961 XX XXX XXX',
+  email: 'joelle.trad@outlook.com',
+  phone: '+33 7 82 94 59 96',
   location: {
-    fr: 'Beyrouth, Liban',
-    en: 'Beirut, Lebanon',
-    ar: 'بيروت، لبنان',
+    fr: 'Paris, France',
+    en: 'Paris, France',
+    ar: 'باريس، فرنسا',
   } as Record<Lang, string>,
   social: {
-    instagram: 'https://instagram.com/joelletrad',
+    instagram: 'https://www.instagram.com/plus_en_moins?igsh=YWlhYnZyaGJ4b3E4',
     linkedin: 'https://linkedin.com/in/joelletrad',
-    pinterest: 'https://pinterest.com/joelletrad',
   },
   formspree: {
     contact: 'https://formspree.io/f/YOUR_FORM_ID',

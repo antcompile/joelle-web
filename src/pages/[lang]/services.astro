@@ -1,10 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../islands/ScrollReveal.tsx';
-import SectionHeading from '../../components/SectionHeading.astro';
 import { type Lang, languages } from '../../i18n/languages';
-import { useTranslation, getLocalizedContent, getLocalizedPath } from '../../i18n/utils';
-import { services } from '../../data/services';
+import { useTranslation, getLocalizedPath } from '../../i18n/utils';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({ params: { lang } }));
@@ -12,74 +10,160 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslation(lang);
-
-const processSteps = [
-  { key: 'process.discovery', number: '01', desc: { fr: 'Comprendre vos besoins, votre style de vie et vos aspirations.', en: 'Understanding your needs, lifestyle, and aspirations.', ar: 'فهم احتياجاتكم ونمط حياتكم وتطلعاتكم.' } },
-  { key: 'process.concept', number: '02', desc: { fr: 'Explorer les directions creatives, moodboards et esquisses.', en: 'Exploring creative directions, mood boards, and sketches.', ar: 'استكشاف التوجهات الإبداعية ولوحات المزاج والرسومات.' } },
-  { key: 'process.design', number: '03', desc: { fr: 'Plans detailles, selection des materiaux et specifications techniques.', en: 'Detailed plans, material selection, and technical specifications.', ar: 'مخططات تفصيلية واختيار المواد والمواصفات الفنية.' } },
-  { key: 'process.execution', number: '04', desc: { fr: 'Suivi de chantier, coordination des artisans et controle qualite.', en: 'Site supervision, artisan coordination, and quality control.', ar: 'إشراف ميداني وتنسيق الحرفيين ومراقبة الجودة.' } },
-  { key: 'process.handover', number: '05', desc: { fr: 'Livraison, mise en scene et accompagnement post-projet.', en: 'Delivery, staging, and post-project support.', ar: 'التسليم والتنسيق والدعم بعد المشروع.' } },
-];
 ---
 
 <BaseLayout title={t('nav.services')} lang={lang}>
-  <div class="pt-28 pb-20 lg:pb-28">
-    <!-- Services Grid -->
-    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 mb-24">
-      <SectionHeading title={t('services.title')} />
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-        {services.map((service, i) => (
-          <ScrollReveal client:visible delay={i * 0.15}>
-            <div class="border-t border-[var(--border)] pt-8">
-              <h3 class="font-serif text-2xl font-semibold mb-4">
-                {getLocalizedContent(service.title, lang)}
-              </h3>
-              <p class="text-[var(--text-secondary)] leading-relaxed mb-6">
-                {getLocalizedContent(service.description, lang)}
-              </p>
-              <ul class="space-y-2">
-                {getLocalizedContent({ fr: service.deliverables.fr.join('|||'), en: service.deliverables.en.join('|||'), ar: service.deliverables.ar.join('|||') }, lang).split('|||').map((item: string) => (
-                  <li class="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                    <span class="text-[var(--accent)] mt-1 flex-shrink-0">&#x2022;</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal>
-        ))}
-      </div>
+  <div class="pt-32 pb-24 lg:pb-32">
+    <!-- Header -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-24">
+      <h1 class="font-serif text-[clamp(2.5rem,5vw,3.5rem)] tracking-[0.05em] mb-6">
+        {t('services.title')}
+      </h1>
     </section>
 
-    <!-- Process Timeline -->
-    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 bg-[var(--surface-alt)] py-20 lg:py-28 relative grain-overlay">
+    <!-- Service A: Architecture d'interieur -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-32">
       <ScrollReveal client:visible>
-        <SectionHeading title={t('about.approach')} />
-      </ScrollReveal>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/joelle-web/images/services/architecture.jpg"
+              alt={t('services.architecture')}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div>
+            <h2 class="font-serif text-2xl lg:text-3xl tracking-wide mb-8">
+              {t('services.architecture')}
+            </h2>
+            <p class="text-[var(--text-secondary)] leading-relaxed mb-8">
+              {t('services.architectureDesc')}
+            </p>
 
-      <div class="space-y-12">
-        {processSteps.map((step, i) => (
-          <ScrollReveal client:visible delay={i * 0.1}>
-            <div class="flex items-start gap-6">
-              <span class="text-3xl font-serif font-bold text-[var(--accent)] flex-shrink-0 w-12">
-                {step.number}
-              </span>
-              <div>
-                <h4 class="font-sans font-medium text-lg">{t(step.key)}</h4>
-                <p class="text-[var(--text-secondary)] mt-1">{getLocalizedContent(step.desc, lang)}</p>
+            <!-- Sub-services cards -->
+            <div class="space-y-10">
+              <!-- Residentiel -->
+              <div class="border-t border-[var(--border)] pt-6">
+                <h3 class="font-sans font-medium text-lg mb-3">{t('services.residential')}</h3>
+                <p class="text-sm text-[var(--text-secondary)] mb-4">{t('services.residentialDesc')}</p>
+                <ul class="grid grid-cols-2 gap-2 text-sm text-[var(--text-muted)]">
+                  <li>Plans et elevations</li>
+                  <li>Selection des materiaux</li>
+                  <li>Eclairage</li>
+                  <li>Mobilier sur mesure</li>
+                </ul>
+              </div>
+
+              <!-- Commercial -->
+              <div class="border-t border-[var(--border)] pt-6">
+                <h3 class="font-sans font-medium text-lg mb-3">{t('services.commercial')}</h3>
+                <p class="text-sm text-[var(--text-secondary)] mb-4">{t('services.commercialDesc')}</p>
+                <ul class="grid grid-cols-2 gap-2 text-sm text-[var(--text-muted)]">
+                  <li>Amenagement spatial</li>
+                  <li>Identite de marque</li>
+                  <li>Conformite reglementaire</li>
+                  <li>Gestion de projet</li>
+                </ul>
+              </div>
+
+              <!-- Consultation -->
+              <div class="border-t border-[var(--border)] pt-6">
+                <h3 class="font-sans font-medium text-lg mb-3">{t('services.consultation')}</h3>
+                <p class="text-sm text-[var(--text-secondary)] mb-4">{t('services.consultationDesc')}</p>
+                <ul class="grid grid-cols-2 gap-2 text-sm text-[var(--text-muted)]">
+                  <li>Palette de couleurs</li>
+                  <li>Moodboards</li>
+                  <li>Specifications materiaux</li>
+                  <li>Direction artistique</li>
+                </ul>
               </div>
             </div>
-          </ScrollReveal>
-        ))}
-      </div>
+          </div>
+        </div>
+      </ScrollReveal>
+    </section>
+
+    <!-- Service B: Mobilier multifonctionnel -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-32">
+      <ScrollReveal client:visible>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div class="order-2 lg:order-1">
+            <h2 class="font-serif text-2xl lg:text-3xl tracking-wide mb-8">
+              {t('services.furniture')}
+            </h2>
+            <p class="text-[var(--text-secondary)] leading-relaxed mb-8">
+              {lang === 'fr'
+                ? "Une approche design centree sur l'optimisation de l'espace, la modularite, la multifonction et l'esthetique minimaliste."
+                : "A design approach centered on space optimization, modularity, multifunction, and minimalist aesthetics."}
+            </p>
+
+            <div class="space-y-10">
+              <div class="border-t border-[var(--border)] pt-6">
+                <h3 class="font-sans font-medium text-lg mb-3">
+                  {lang === 'fr' ? 'Design de mobilier' : 'Furniture Design'}
+                </h3>
+                <p class="text-sm text-[var(--text-secondary)]">
+                  {lang === 'fr'
+                    ? "Conception de pieces uniques et intelligentes adaptees aux petits espaces."
+                    : "Unique and intelligent pieces designed for small spaces."}
+                </p>
+              </div>
+
+              <div class="border-t border-[var(--border)] pt-6">
+                <h3 class="font-sans font-medium text-lg mb-3">
+                  {lang === 'fr' ? 'Mobilier multifonctionnel' : 'Multifunctional Furniture'}
+                </h3>
+                <p class="text-sm text-[var(--text-secondary)]">
+                  {lang === 'fr'
+                    ? "Meubles hybrides combinant plusieurs usages (travail, rangement, repos, etc.)."
+                    : "Hybrid furniture combining multiple uses (work, storage, rest, etc.)."}
+                </p>
+              </div>
+
+              <div class="border-t border-[var(--border)] pt-6">
+                <h3 class="font-sans font-medium text-lg mb-3">
+                  {lang === 'fr' ? 'Sur mesure' : 'Custom Made'}
+                </h3>
+                <p class="text-sm text-[var(--text-secondary)]">
+                  {lang === 'fr'
+                    ? "Adaptation complete aux besoins du client, aux contraintes d'espace et au mode de vie."
+                    : "Complete adaptation to client needs, space constraints, and lifestyle."}
+                </p>
+              </div>
+
+              <div class="border-t border-[var(--border)] pt-6">
+                <h3 class="font-sans font-medium text-lg mb-3">
+                  {lang === 'fr' ? 'Choix des materiaux & finitions' : 'Materials & Finishes'}
+                </h3>
+                <p class="text-sm text-[var(--text-secondary)]">
+                  {lang === 'fr'
+                    ? "Approche durable avec materiaux responsables et finitions haut de gamme."
+                    : "Sustainable approach with responsible materials and premium finishes."}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-1 lg:order-2 aspect-[4/3] overflow-hidden">
+            <img
+              src="/joelle-web/images/services/furniture-nest.jpg"
+              alt={t('services.furniture')}
+              class="w-full h-full object-cover"
+            />
+            <!-- Video placeholder -->
+            <div class="mt-6 aspect-video bg-[var(--surface-alt)] flex items-center justify-center border border-[var(--border)]">
+              <p class="text-sm text-[var(--text-muted)]">Video — Coming soon</p>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
     </section>
 
     <!-- CTA -->
-    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 py-20 text-center">
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
       <ScrollReveal client:visible>
-        <h2 class="font-serif text-2xl font-semibold mb-6">
-          {lang === 'fr' ? 'Discutons de votre projet' : lang === 'ar' ? 'لنناقش مشروعكم' : "Let's discuss your project"}
+        <h2 class="font-serif text-2xl tracking-wide mb-6">
+          {lang === 'fr' ? 'Discutons de votre projet' : "Let's discuss your project"}
         </h2>
         <a href={getLocalizedPath(lang, '/contact')} class="btn-primary">
           {t('common.getInTouch')}

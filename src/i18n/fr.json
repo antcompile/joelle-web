@@ -1,15 +1,15 @@
 {
   "nav.home": "Accueil",
-  "nav.projects": "Projets",
-  "nav.about": "A Propos",
   "nav.services": "Services",
+  "nav.projects": "Projets",
+  "nav.about": "A propos",
   "nav.contact": "Contact",
 
-  "hero.title": "Architecture Interieure",
-  "hero.subtitle": "Creer des espaces qui racontent votre histoire",
-  "hero.cta": "Decouvrir les projets",
+  "hero.title": "Transformer moins en beaucoup plus.",
+  "hero.subtitle": "Architecture d'interieur & mobilier multifonctionnel",
+  "hero.cta": "Decouvrir nos services",
 
-  "projects.title": "Projets Selectionnes",
+  "projects.title": "Projets",
   "projects.viewAll": "Voir tous les projets",
   "projects.filterAll": "Tous",
   "projects.filterResidential": "Residentiel",
@@ -22,14 +22,18 @@
   "projects.next": "Projet suivant",
   "projects.back": "Retour aux projets",
 
-  "about.title": "A Propos",
-  "about.teaser": "Chaque espace a une ame. Mon role est de la reveler.",
+  "about.title": "A propos",
+  "about.teaser": "Transformer moins en beaucoup plus.",
   "about.learnMore": "En savoir plus",
   "about.background": "Parcours",
   "about.philosophy": "Philosophie",
   "about.approach": "Approche",
 
   "services.title": "Services",
+  "services.architecture": "Architecture d'interieur",
+  "services.architectureDesc": "Conception d'espaces residentiels et commerciaux. Des interieurs qui allient fonctionnalite, esthetique et bien-etre au quotidien.",
+  "services.furniture": "Mobilier multifonctionnel",
+  "services.furnitureDesc": "Pieces de mobilier sur mesure qui transforment les petits espaces. Chaque meuble repond a plusieurs usages avec elegance.",
   "services.residential": "Residentiel",
   "services.residentialDesc": "Maisons, appartements et villas. Des espaces de vie qui reflettent votre personnalite et votre mode de vie.",
   "services.commercial": "Commercial",
@@ -56,7 +60,7 @@
   "contact.availability": "Actuellement disponible pour de nouveaux projets",
   "contact.response": "Repond generalement sous 48h",
 
-  "footer.tagline": "Architecture & Design Interieur",
+  "footer.tagline": "Architecture d'interieur & Mobilier multifonctionnel",
   "footer.rights": "Tous droits reserves",
 
   "common.back": "Retour",

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../islands/ScrollReveal.tsx';
-import SectionHeading from '../../components/SectionHeading.astro';
 import { type Lang, languages } from '../../i18n/languages';
 import { useTranslation, getLocalizedPath } from '../../i18n/utils';
 
@@ -11,24 +10,16 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslation(lang);
-
-const processSteps = [
-  { key: 'process.discovery', number: '01' },
-  { key: 'process.concept', number: '02' },
-  { key: 'process.design', number: '03' },
-  { key: 'process.execution', number: '04' },
-  { key: 'process.handover', number: '05' },
-];
 ---
 
 <BaseLayout title={t('nav.about')} lang={lang}>
-  <div class="pt-28 pb-20 lg:pb-28">
+  <div class="pt-32 pb-24 lg:pb-32">
     <!-- Portrait + Philosophy -->
-    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-32">
       <ScrollReveal client:visible>
         <div class="aspect-[3/4] overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
+            src="/joelle-web/images/about/portrait.jpg"
             alt="Joelle Trad"
             class="w-full h-full object-cover"
           />
@@ -37,57 +28,51 @@ const processSteps = [
 
       <ScrollReveal client:visible delay={0.2}>
         <div>
-          <h1 class="font-serif text-[clamp(2rem,4vw,3rem)] font-semibold mb-8">
+          <p class="text-xs font-sans font-medium uppercase tracking-[0.2em] text-[var(--accent)] mb-8">
             {t('about.title')}
-          </h1>
-          <blockquote class="font-serif text-2xl leading-relaxed text-[var(--text-primary)] mb-8 border-s-2 border-[var(--accent)] ps-6">
-            "{t('about.teaser')}"
+          </p>
+          <blockquote class="font-serif text-2xl lg:text-3xl leading-relaxed text-[var(--text-primary)] mb-10">
+            &laquo; Transformer moins en beaucoup plus. &raquo;
           </blockquote>
-          <div class="space-y-4 text-[var(--text-secondary)] leading-relaxed max-w-prose">
+          <div class="space-y-6 text-[var(--text-secondary)] leading-relaxed max-w-prose">
             <p>
               {lang === 'fr'
-                ? "Architecte d'interieur basee entre Beyrouth et Paris, je cree des espaces qui conjuguent fonctionnalite, esthetique et emotion. Chaque projet est une conversation entre le lieu, les materiaux et les personnes qui l'habitent."
+                ? "Je suis Joelle Trad, architecte d'interieur basee a Paris."
                 : lang === 'ar'
-                ? "مهندسة معمارية داخلية مقيمة بين بيروت وباريس، أصمم مساحات تجمع بين الوظيفة والجمالية والعاطفة. كل مشروع هو حوار بين المكان والمواد والأشخاص الذين يعيشون فيه."
-                : "Interior architect based between Beirut and Paris, I create spaces that combine functionality, aesthetics, and emotion. Every project is a conversation between the place, the materials, and the people who inhabit it."}
+                ? "أنا جويل تراد، مهندسة معمارية داخلية مقيمة في باريس."
+                : "I'm Joelle Trad, interior architect based in Paris."}
             </p>
             <p>
               {lang === 'fr'
-                ? "Diplomee de l'Academie Libanaise des Beaux-Arts avec plus de dix ans d'experience, j'ai developpe une approche qui privilegie la materialite, la lumiere naturelle et la durabilite."
+                ? "Mon travail explore une certaine idee de l'art de vivre, ou architecture, design et fonction s'accordent avec precision et evidence. Je concois des interieurs et imagine des pieces de mobilier multifonctionnelles, pensees pour accompagner les usages contemporains, notamment dans des espaces compacts."
                 : lang === 'ar'
-                ? "خريجة الأكاديمية اللبنانية للفنون الجميلة مع أكثر من عشر سنوات من الخبرة، طورت منهجاً يركز على المادية والضوء الطبيعي والاستدامة."
-                : "Graduated from the Lebanese Academy of Fine Arts with over ten years of experience, I've developed an approach that prioritizes materiality, natural light, and sustainability."}
+                ? "عملي يستكشف فكرة معينة عن فن العيش، حيث تتناغم العمارة والتصميم والوظيفة بدقة وبديهية."
+                : "My work explores a certain idea of the art of living, where architecture, design and function come together with precision and clarity. I design interiors and create multifunctional furniture pieces, thoughtfully crafted to support contemporary lifestyles, particularly in compact spaces."}
+            </p>
+            <p>
+              {lang === 'fr'
+                ? "Chaque projet est une recherche d'equilibre, une ecriture juste ou chaque element trouve naturellement sa place. Je privilegie la clarte des lignes, la discretion des solutions et une elegance qui se devoile dans l'usage."
+                : lang === 'ar'
+                ? "كل مشروع هو بحث عن التوازن، كتابة دقيقة حيث يجد كل عنصر مكانه بشكل طبيعي."
+                : "Each project is a search for balance, a precise composition where every element finds its natural place. I prioritize clarity of lines, discretion of solutions, and an elegance that reveals itself in use."}
+            </p>
+            <p>
+              {lang === 'fr'
+                ? "Dans les espaces reduits, je vois avant tout une opportunite de repenser la maniere d'habiter. A travers des interventions sur mesure et des objets penses pour transformer l'espace, je cherche a reveler une nouvelle fluidite, ou confort, fonctionnalite et esthetique coexistent avec simplicite et exigence."
+                : lang === 'ar'
+                ? "في المساحات الصغيرة، أرى قبل كل شيء فرصة لإعادة التفكير في طريقة السكن."
+                : "In small spaces, I see above all an opportunity to rethink the way we live. Through bespoke interventions and objects designed to transform space, I seek to reveal a new fluidity, where comfort, functionality and aesthetics coexist with simplicity and rigor."}
             </p>
           </div>
         </div>
       </ScrollReveal>
     </section>
 
-    <!-- Process -->
-    <section class="max-w-[1440px] mx-auto px-6 lg:px-8">
-      <ScrollReveal client:visible>
-        <SectionHeading title={t('about.approach')} />
-      </ScrollReveal>
-
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-        {processSteps.map((step, i) => (
-          <ScrollReveal client:visible delay={i * 0.1}>
-            <div class="text-center md:text-start">
-              <span class="text-3xl font-serif font-bold text-[var(--accent)]">{step.number}</span>
-              <p class="mt-2 font-sans font-medium text-sm uppercase tracking-wide">
-                {t(step.key)}
-              </p>
-            </div>
-          </ScrollReveal>
-        ))}
-      </div>
-    </section>
-
     <!-- CTA -->
-    <section class="max-w-[1440px] mx-auto px-6 lg:px-8 mt-24 text-center">
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
       <ScrollReveal client:visible>
         <a href={getLocalizedPath(lang, '/contact')} class="btn-primary">
-          {t('common.letsWork')}
+          {t('common.getInTouch')}
         </a>
       </ScrollReveal>
     </section>

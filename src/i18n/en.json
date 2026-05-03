@@ -1,15 +1,15 @@
 {
   "nav.home": "Home",
+  "nav.services": "Services",
   "nav.projects": "Projects",
   "nav.about": "About",
-  "nav.services": "Services",
   "nav.contact": "Contact",
 
-  "hero.title": "Interior Architecture",
-  "hero.subtitle": "Creating spaces that tell your story",
-  "hero.cta": "Discover Projects",
+  "hero.title": "Transform less into so much more.",
+  "hero.subtitle": "Interior architecture & multifunctional furniture",
+  "hero.cta": "Discover Our Services",
 
-  "projects.title": "Selected Projects",
+  "projects.title": "Projects",
   "projects.viewAll": "View All Projects",
   "projects.filterAll": "All",
   "projects.filterResidential": "Residential",
@@ -23,13 +23,17 @@
   "projects.back": "Back to Projects",
 
   "about.title": "About",
-  "about.teaser": "Every space has a soul. My role is to reveal it.",
+  "about.teaser": "Transform less into so much more.",
   "about.learnMore": "Learn more",
   "about.background": "Background",
   "about.philosophy": "Philosophy",
   "about.approach": "Approach",
 
   "services.title": "Services",
+  "services.architecture": "Interior Architecture",
+  "services.architectureDesc": "Residential and commercial space design. Interiors that balance function, beauty, and daily well-being.",
+  "services.furniture": "Multifunctional Furniture",
+  "services.furnitureDesc": "Bespoke furniture pieces that transform small spaces. Each piece serves multiple purposes with elegance.",
   "services.residential": "Residential",
   "services.residentialDesc": "Homes, apartments, and villas. Living spaces that reflect your personality and lifestyle.",
   "services.commercial": "Commercial",
@@ -56,7 +60,7 @@
   "contact.availability": "Currently accepting new projects",
   "contact.response": "Typically responds within 48 hours",
 
-  "footer.tagline": "Interior Architecture & Design",
+  "footer.tagline": "Interior Architecture & Multifunctional Furniture",
   "footer.rights": "All rights reserved",
 
   "common.back": "Back",
