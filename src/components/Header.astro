@@ -21,23 +21,28 @@ const t = useTranslation(lang);
 >
   <div class="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between py-8">
     <!-- Logo -->
-    <a href={getLocalizedPath(lang, '/')} class="font-serif font-normal text-lg tracking-[0.4em] uppercase">
+    <a href={getLocalizedPath(lang, '/')} class="font-serif font-normal text-lg tracking-[0.4em] uppercase [color:inherit]">
       PLUS EN MOINS
     </a>
 
     <!-- Desktop Nav -->
     <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
-      {mainNav.map((item) => (
-        <a
-          href={getLocalizedPath(lang, item.path)}
-          class:list={[
-            'text-xs font-sans font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-[var(--accent)] cursor-pointer',
-            currentPath.endsWith(item.path) || (item.path === '/' && currentPath.endsWith(`/${lang}/`)) ? 'text-[var(--text-primary)] border-b border-[var(--accent)] pb-1' : 'text-[var(--text-secondary)]',
-          ]}
-        >
-          {t(item.key)}
-        </a>
-      ))}
+      {mainNav.map((item) => {
+        const isActive = item.path === '/'
+          ? currentPath.replace(/\/$/, '') === getLocalizedPath(lang, '/').replace(/\/$/, '')
+          : currentPath.includes(item.path);
+        return (
+          <a
+            href={getLocalizedPath(lang, item.path)}
+            class:list={[
+              'nav-link text-xs font-sans font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-[var(--accent)] cursor-pointer [color:inherit]',
+              isActive ? 'border-b border-[var(--accent)] pb-1' : '',
+            ]}
+          >
+            {t(item.key)}
+          </a>
+        );
+      })}
     </nav>
 
     <!-- Right side: Lang + Theme + Mobile toggle -->
@@ -94,17 +99,20 @@ const t = useTranslation(lang);
 
   // Scroll-aware header
   const hero = document.querySelector('[data-hero]');
+
   if (hero && header) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           header.setAttribute('data-transparent', 'true');
-          header.classList.remove('bg-[var(--surface)]', 'shadow-sm');
-          header.classList.add('text-white');
+          header.style.backgroundColor = 'transparent';
+          header.style.boxShadow = 'none';
+          header.style.color = 'white';
         } else {
           header.setAttribute('data-transparent', 'false');
-          header.classList.add('bg-[var(--surface)]', 'shadow-sm');
-          header.classList.remove('text-white');
+          header.style.backgroundColor = 'var(--surface)';
+          header.style.boxShadow = '0 1px 2px rgba(0,0,0,0.05)';
+          header.style.color = 'var(--text-primary)';
         }
       },
       { threshold: 0.1 }
@@ -112,7 +120,9 @@ const t = useTranslation(lang);
     observer.observe(hero);
   } else if (header) {
     header.setAttribute('data-transparent', 'false');
-    header.classList.add('bg-[var(--surface)]', 'shadow-sm');
+    header.style.backgroundColor = 'var(--surface)';
+    header.style.boxShadow = '0 1px 2px rgba(0,0,0,0.05)';
+    header.style.color = 'var(--text-primary)';
   }
 
   // Mobile menu toggle

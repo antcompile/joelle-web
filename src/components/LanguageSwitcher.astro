@@ -22,15 +22,15 @@ const langLabels: Record<Lang, string> = {
 };
 ---
 
-<nav class="flex items-center gap-1 text-sm" aria-label="Select language">
+<nav class="flex items-center gap-1 text-sm [color:inherit]" aria-label="Select language">
   {(Object.keys(languages) as Lang[]).map((l, i) => (
     <>
-      {i > 0 && <span class="text-[var(--text-muted)]">|</span>}
+      {i > 0 && <span class="opacity-50">|</span>}
       <a
         href={getSwitchedPath(l)}
         class:list={[
           'px-1 transition-colors duration-200 cursor-pointer',
-          l === lang ? 'text-[var(--accent)] font-medium' : 'text-[var(--text-secondary)] hover:text-[var(--accent)]',
+          l === lang ? 'opacity-100 font-medium' : 'opacity-60 hover:opacity-100',
         ]}
         aria-current={l === lang ? 'true' : undefined}
       >
