@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../../islands/ScrollReveal.tsx';
 import ProjectGallery from '../../../islands/ProjectGallery.tsx';
+import PanoramaViewer from '../../../islands/PanoramaViewer.tsx';
 import { type Lang, languages } from '../../../i18n/languages';
 import { useTranslation } from '../../../i18n/utils';
 
@@ -12,19 +13,20 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslation(lang);
 
-const categories = ['all', 'residential', 'commercial'] as const;
+const categories = ['all', 'residential', 'commercial', '360'] as const;
 const categoryLabels: Record<string, string> = {
   all: t('projects.filterAll'),
   residential: t('projects.filterResidential'),
   commercial: t('projects.filterCommercial'),
+  '360': t('projects.filter360'),
 };
 
 const residentialImages = Array.from({ length: 10 }, (_, i) =>
-  `/joelle-web/images/projects/residential/${String(i + 1).padStart(2, '0')}.jpg`
+  `/images/projects/residential/${String(i + 1).padStart(2, '0')}.jpg`
 );
 
 const commercialImages = Array.from({ length: 9 }, (_, i) =>
-  `/joelle-web/images/projects/commercial/${String(i + 1).padStart(2, '0')}.jpg`
+  `/images/projects/commercial/${String(i + 1).padStart(2, '0')}.jpg`
 );
 ---
 
@@ -82,13 +84,34 @@ const commercialImages = Array.from({ length: 9 }, (_, i) =>
 
       <ProjectGallery client:visible images={commercialImages} />
     </div>
+
+    <!-- 360 Section -->
+    <div data-section="360" class="mb-24">
+      <ScrollReveal client:visible>
+        <div class="mb-10">
+          <h2 class="font-serif text-2xl tracking-wide mb-4">{t('projects.360title')}</h2>
+          <p class="text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+            {t('projects.360desc')}
+          </p>
+        </div>
+      </ScrollReveal>
+
+      <PanoramaViewer
+        client:visible
+        imageSrc="/images/projects/360/panorama-01.jpg"
+        hint={t('projects.360hint')}
+      />
+    </div>
   </div>
 </BaseLayout>
 
 <script>
   const buttons = document.querySelectorAll('[data-filter]');
-  const residentialSection = document.querySelector('[data-section="residential"]');
-  const commercialSection = document.querySelector('[data-section="commercial"]');
+  const sections = {
+    residential: document.querySelector('[data-section="residential"]') as HTMLElement,
+    commercial: document.querySelector('[data-section="commercial"]') as HTMLElement,
+    '360': document.querySelector('[data-section="360"]') as HTMLElement,
+  };
 
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -102,14 +125,11 @@ const commercialImages = Array.from({ length: 9 }, (_, i) =>
       btn.setAttribute('aria-selected', 'true');
 
       if (filter === 'all') {
-        (residentialSection as HTMLElement).style.display = '';
-        (commercialSection as HTMLElement).style.display = '';
-      } else if (filter === 'residential') {
-        (residentialSection as HTMLElement).style.display = '';
-        (commercialSection as HTMLElement).style.display = 'none';
-      } else if (filter === 'commercial') {
-        (residentialSection as HTMLElement).style.display = 'none';
-        (commercialSection as HTMLElement).style.display = '';
+        Object.values(sections).forEach((s) => { if (s) s.style.display = ''; });
+      } else {
+        Object.entries(sections).forEach(([key, s]) => {
+          if (s) s.style.display = key === filter ? '' : 'none';
+        });
       }
     });
   });

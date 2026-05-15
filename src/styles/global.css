@@ -79,35 +79,35 @@
 
 @font-face {
   font-family: 'Cinzel';
-  src: url('/joelle-web/fonts/cinzel-500.woff2') format('woff2');
+  src: url('/fonts/cinzel-500.woff2') format('woff2');
   font-weight: 500 700;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Josefin Sans';
-  src: url('/joelle-web/fonts/josefin-sans-400.woff2') format('woff2');
+  src: url('/fonts/josefin-sans-400.woff2') format('woff2');
   font-weight: 300 500;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Noto Naskh Arabic';
-  src: url('/joelle-web/fonts/noto-naskh-arabic-700.woff2') format('woff2');
+  src: url('/fonts/noto-naskh-arabic-700.woff2') format('woff2');
   font-weight: 700;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Noto Sans Arabic';
-  src: url('/joelle-web/fonts/noto-sans-arabic-400.woff2') format('woff2');
+  src: url('/fonts/noto-sans-arabic-400.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Noto Sans Arabic';
-  src: url('/joelle-web/fonts/noto-sans-arabic-500.woff2') format('woff2');
+  src: url('/fonts/noto-sans-arabic-500.woff2') format('woff2');
   font-weight: 500;
   font-display: swap;
 }
